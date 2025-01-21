@@ -9,6 +9,12 @@ int main(int argc, char* argv[]){
     window.setFramerateLimit(60);
 
     Grid grid = Grid();
+    // Test
+    grid.grid[0][1] = 5;
+    grid.grid[1][0] = 5;
+    grid.grid[1][1] = 5;
+    grid.grid[1][2] = 5;
+
     grid.Print();
 
     while(window.isOpen()){
