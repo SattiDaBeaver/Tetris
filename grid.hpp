@@ -12,7 +12,6 @@ class Grid{
 
 
     private:
-        std::vector<sf::Color> GetCellColors();
         int numRows;
         int numCols;
         int cellSize;

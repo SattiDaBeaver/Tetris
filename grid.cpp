@@ -1,5 +1,6 @@
 #include "grid.hpp"
 #include <iostream>
+#include "colors.hpp"
 
 Grid::Grid(){
     numRows = 20;
@@ -24,19 +25,6 @@ void Grid::Print(){
         }
         std::cout << std::endl;
     }
-}
-
-std::vector<sf::Color> Grid::GetCellColors(){
-    sf::Color darkGrey = {26, 31, 40, 255};
-    sf::Color green = {47, 230, 23, 255};
-    sf::Color red = {232, 18, 18, 255};
-    sf::Color orange = {226, 116, 17, 255};
-    sf::Color yellow = {237, 234, 4, 255};
-    sf::Color purple = {166, 0, 247, 255};
-    sf::Color cyan = {21, 204, 29, 255};
-    sf::Color blue = {13, 64, 216, 255};
-
-    return {darkGrey, green, red, orange, yellow, purple, cyan, blue};
 }
 
 void Grid::Draw(sf::RenderWindow &window){

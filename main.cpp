@@ -1,6 +1,7 @@
 #include <optional>
 #include "game.hpp"
 #include "grid.hpp"
+#include "blocks.cpp"
 
 int main(int argc, char* argv[]){
     sf::Color darkBlue = {44, 44, 127, 255};
@@ -10,10 +11,7 @@ int main(int argc, char* argv[]){
 
     Grid grid = Grid();
     // Test
-    grid.grid[0][1] = 5;
-    grid.grid[1][0] = 5;
-    grid.grid[1][1] = 5;
-    grid.grid[1][2] = 5;
+    LBlock block = LBlock();
 
     grid.Print();
 
@@ -29,6 +27,7 @@ int main(int argc, char* argv[]){
         // Clear screen
         window.clear(darkBlue);
         grid.Draw(window);
+        block.Draw(window);
 
         window.display();
     }
