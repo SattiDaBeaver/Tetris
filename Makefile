@@ -12,4 +12,4 @@ exe:
 	./main
 
 clean:
-	del -f game.o main.exe *.o 
+	del -f rid.o blocks.o block.o position.o colors.o game.o main.exe *.o 

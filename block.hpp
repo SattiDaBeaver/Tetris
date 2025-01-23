@@ -8,11 +8,15 @@ class Block{
     public:
         Block();
         void Draw(sf::RenderWindow& window);
+        void Move(int rows, int cols);
+        std::vector<Position> GetCellPosition();
+        void getCellPosition();
         int id;
         std::map<int, std::vector<Position>> cells;
     private:
         int cellSize;
         int rotationState;
         std::vector<sf::Color> colors;
-        
+        int rowOffset;
+        int colOffset;
 };

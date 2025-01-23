@@ -11,8 +11,17 @@ int main(int argc, char* argv[]){
 
     Grid grid = Grid();
     // Test
-    LBlock block = LBlock();
+    LBlock lBlock = LBlock();
     IBlock iBlock = IBlock();
+    JBlock jBlock = JBlock();
+    OBlock oBlock = OBlock();
+    TBlock tBlock = TBlock();
+    SBlock sBlock = SBlock();
+    ZBlock zBlock = ZBlock();
+
+    //zBlock.Move(4, 3);
+
+    // Test End
 
     grid.Print();
 
@@ -24,12 +33,18 @@ int main(int argc, char* argv[]){
             if (event->is<sf::Event::Closed>())
                 window.close();
         }
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Escape)){
+            window.close();
+        }
  
         // Clear screen
         window.clear(darkBlue);
-        grid.Draw(window);
-        block.Draw(window);
 
+        // Draw Stuff
+        grid.Draw(window);
+        zBlock.Draw(window);
+
+        // Render Display
         window.display();
     }
 
