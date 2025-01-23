@@ -12,6 +12,7 @@ int main(int argc, char* argv[]){
     Grid grid = Grid();
     // Test
     LBlock block = LBlock();
+    IBlock iBlock = IBlock();
 
     grid.Print();
 
