@@ -7,12 +7,15 @@
 class Block{
     public:
         Block();
+        int id;
+
         void Draw(sf::RenderWindow& window);
         void Move(int rows, int cols);
         std::vector<Position> GetCellPosition();
-        void getCellPosition();
-        int id;
+        void Rotate();
         std::map<int, std::vector<Position>> cells;
+        void UndoRotation();
+
     private:
         int cellSize;
         int rotationState;

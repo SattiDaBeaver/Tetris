@@ -1,31 +1,47 @@
 #include <optional>
 #include "game.hpp"
-#include "grid.hpp"
-#include "blocks.cpp"
+
+sf::Clock gameClock;
+
+bool EventTriggered(double interval, sf::Time &lastUpdateTime){
+    sf::Time currentTime = gameClock.getElapsedTime();
+    double doubleTime = (double) currentTime.asMicroseconds() / 1000.f;
+    if (doubleTime - lastUpdateTime.asMilliseconds() >= interval){
+        lastUpdateTime = currentTime;
+        return true;
+    }
+    return false;
+}
 
 int main(int argc, char* argv[]){
     sf::Color darkBlue = {44, 44, 127, 255};
 
     sf::RenderWindow window(sf::VideoMode({300, 600}), "Tetris!");
     window.setFramerateLimit(60);
+    window.setKeyRepeatEnabled(false);
 
-    Grid grid = Grid();
+    Game game = Game();
     // Test
-    LBlock lBlock = LBlock();
-    IBlock iBlock = IBlock();
-    JBlock jBlock = JBlock();
-    OBlock oBlock = OBlock();
-    TBlock tBlock = TBlock();
-    SBlock sBlock = SBlock();
-    ZBlock zBlock = ZBlock();
+    
 
-    //zBlock.Move(4, 3);
+    // zBlock.Move(4, 3);
 
     // Test End
 
-    grid.Print();
+    // Clock Variables
+    sf::Time fallTime = gameClock.getElapsedTime();
+    sf::Time inputTime = gameClock.getElapsedTime();
 
     while(window.isOpen()){
+
+        // Game Stuff
+            //if (EventTriggered(10, inputTime))
+            game.HandleInput(window);
+            
+            if(EventTriggered(100, fallTime)){
+                game.MoveBlockDown();
+            }
+        // Window Stuff
 
         while (const std::optional event = window.pollEvent())
         {
@@ -38,11 +54,11 @@ int main(int argc, char* argv[]){
         }
  
         // Clear screen
+
         window.clear(darkBlue);
 
         // Draw Stuff
-        grid.Draw(window);
-        zBlock.Draw(window);
+        game.Draw(window);
 
         // Render Display
         window.display();
@@ -50,3 +66,5 @@ int main(int argc, char* argv[]){
 
     return 0;
 }
+
+// Functions
