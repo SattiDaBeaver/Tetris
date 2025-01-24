@@ -12,7 +12,7 @@ void Block::Draw(sf::RenderWindow &window) {
     std::vector<Position> tiles = GetCellPosition();
     for (Position item : tiles) {
         sf::RectangleShape renderCell({(float)(cellSize - 1), (float)(cellSize - 1)});
-        renderCell.setPosition({(float)(item.col * cellSize + 1), (float)(item.row * cellSize + 1)});
+        renderCell.setPosition({(float)(item.col * cellSize + 11), (float)(item.row * cellSize + 11)});
         renderCell.setFillColor(colors[id]);
         window.draw(renderCell);
     }

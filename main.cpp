@@ -14,9 +14,8 @@ bool EventTriggered(double interval, sf::Time &lastUpdateTime){
 }
 
 int main(int argc, char* argv[]){
-    sf::Color darkBlue = {44, 44, 127, 255};
 
-    sf::RenderWindow window(sf::VideoMode({300, 600}), "Tetris!");
+    sf::RenderWindow window(sf::VideoMode({500, 620}), "Tetris!");
     window.setFramerateLimit(60);
     window.setKeyRepeatEnabled(false);
 
@@ -38,7 +37,7 @@ int main(int argc, char* argv[]){
             //if (EventTriggered(10, inputTime))
             game.HandleInput(window);
             
-            if(EventTriggered(100, fallTime)){
+            if(EventTriggered(500, fallTime)){
                 game.MoveBlockDown();
             }
         // Window Stuff
@@ -55,7 +54,7 @@ int main(int argc, char* argv[]){
  
         // Clear screen
 
-        window.clear(darkBlue);
+        window.clear(sf::Color({44, 44, 127, 255}));
 
         // Draw Stuff
         game.Draw(window);

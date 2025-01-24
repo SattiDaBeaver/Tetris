@@ -32,7 +32,7 @@ void Grid::Draw(sf::RenderWindow &window){
         for (int col = 0; col < numCols; col++){
             int cellValue = grid[row][col];
             sf::RectangleShape renderCell({(float)(cellSize - 1), (float)(cellSize - 1)});
-            renderCell.setPosition({(float)(col * cellSize + 1), (float)(row * cellSize + 1)});
+            renderCell.setPosition({(float)(col * cellSize + 11), (float)(row * cellSize + 11)});
             renderCell.setFillColor(colors[cellValue]);
             window.draw(renderCell);
         }
