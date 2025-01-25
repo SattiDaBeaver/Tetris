@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include <random>
+#include <time.h>
 #include <optional>
 
 Game::Game(){
@@ -14,7 +15,9 @@ Block Game::GetRandomBlock(){
     if (blocks.empty()){
         blocks = GetAllBlocks();
     }
-
+    time_t seed;
+    time(&seed);
+    srand((unsigned int)seed);
     int randomIndex = rand() % blocks.size();
     Block block = blocks[randomIndex];
     blocks.erase(blocks.begin() + randomIndex);
@@ -27,7 +30,17 @@ std::vector<Block> Game::GetAllBlocks(){
 
 void Game::Draw(sf::RenderWindow &window){
     grid.Draw(window);
-    currentBlock.Draw(window);
+    currentBlock.Draw(window, 11, 11);
+    switch(nextBlock.id){
+        case 3:
+            nextBlock.Draw(window, 255, 290);
+            break;
+        case 7:
+            nextBlock.Draw(window, 255, 280);
+            break;
+        default:
+            nextBlock.Draw(window, 270, 270);
+    }
 }
 
 void Game::HandleInput(sf::RenderWindow &window){
@@ -48,6 +61,7 @@ void Game::HandleInput(sf::RenderWindow &window){
 
             case(sf::Keyboard::Scan::S):
                 MoveBlockDown();
+                UpdateScore(0, 1);
                 break;
 
             case(sf::Keyboard::Scan::W):
@@ -56,6 +70,7 @@ void Game::HandleInput(sf::RenderWindow &window){
                 
             case(sf::Keyboard::Scan::Space):
                 InstantDrop();
+                UpdateScore(0, 10);
                 break;
         }
         // if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::A)){
@@ -140,7 +155,8 @@ void Game::LockBlock(){
         gameOver = true;
     }
     nextBlock = GetRandomBlock();
-    grid.ClearFullRows();
+    int rowsCleared = grid.ClearFullRows();
+    UpdateScore(rowsCleared, 0);
 }
 
 bool Game::BlockFits(){
@@ -158,4 +174,28 @@ void Game::Reset(){
     blocks = GetAllBlocks();
     currentBlock = GetRandomBlock();
     nextBlock = GetRandomBlock();
+    score = 0;
+}
+
+void Game::UpdateScore(int linesCleared, int moveDownPoints){
+    switch (linesCleared)
+    {
+    case 1:
+        score += 100;
+        break;
+    case 2:
+        score += 300;
+        break;
+    case 3:
+        score += 600;
+        break;
+    case 4:
+        score += 1000;
+        break;
+
+    default:
+        break;
+    }
+
+    score += moveDownPoints;
 }

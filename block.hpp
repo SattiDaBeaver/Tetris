@@ -9,7 +9,7 @@ class Block{
         Block();
         int id;
 
-        void Draw(sf::RenderWindow& window);
+        void Draw(sf::RenderWindow& window, int offsetX, int offsetY);
         void Move(int rows, int cols);
         std::vector<Position> GetCellPosition();
         void Rotate();

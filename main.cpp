@@ -1,6 +1,7 @@
 #include <optional>
 #include "game.hpp"
 #include "colors.hpp"
+#include <iostream>
 
 sf::Clock gameClock;
 
@@ -25,19 +26,22 @@ int main(int argc, char* argv[]){
     
     // Font and Text
     sf::Font font("inter.ttf");
+
     sf::Text scoreText(font);
     sf::Text nextText(font);
     sf::Text gameOverText(font);
+    sf::Text scoreNumText(font);
 
     scoreText.setCharacterSize(32);
     nextText.setCharacterSize(32);
     gameOverText.setCharacterSize(64);
+    scoreNumText.setCharacterSize(38);
 
     scoreText.setString("Score");
     nextText.setString("Next");
     gameOverText.setString("GAME OVER");
 
-    scoreText.setPosition({365, 15});
+    scoreText.setPosition({360, 15});
     nextText.setPosition({370, 175});
     gameOverText.setPosition({55, 250});
 
@@ -70,6 +74,11 @@ int main(int argc, char* argv[]){
             if(EventTriggered(500, fallTime)){
                 game.MoveBlockDown();
             }
+
+            scoreNumText.setString(std::to_string(game.score));
+            sf::FloatRect rect = scoreNumText.getLocalBounds();
+            sf::Vector2f textWidth = rect.size;
+            scoreNumText.setPosition({315 + (170 - textWidth.x) / 2, 60});
         // Window Stuff
 
         while (const std::optional event = window.pollEvent())
@@ -87,12 +96,15 @@ int main(int argc, char* argv[]){
         window.clear(darkBlue);
 
         // Draw Stuff
-        game.Draw(window);
+        
         // Score n shit
         window.draw(scoreText);
         window.draw(nextText);
         window.draw(scoreRectangle);
+        window.draw(scoreNumText);
         window.draw(nextRectangle);
+
+        game.Draw(window);
 
         if (game.gameOver){
             window.draw(gameOverRectangle);

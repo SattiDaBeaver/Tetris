@@ -8,6 +8,7 @@ class Game{
         Game();
         Grid grid;
         bool gameOver;
+        int score;
 
         Block GetRandomBlock();
         std::vector<Block> GetAllBlocks();
@@ -19,14 +20,17 @@ class Game{
         void MoveBlockDown();
         void InstantDrop();
 
-       private:
-        std::vector<Block> blocks;
         Block currentBlock;
         Block nextBlock;
+
+       private:
+        std::vector<Block> blocks;
+        
         bool IsBlockOutside();
         void RotateBlock();
         void LockBlock();
         bool BlockFits();
         void Reset();
+        void UpdateScore(int linesCleared, int moveDownPoints);
 
 };

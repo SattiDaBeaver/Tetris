@@ -8,11 +8,11 @@ Block::Block() {
     colOffset = 0;
 }
 
-void Block::Draw(sf::RenderWindow &window) {
+void Block::Draw(sf::RenderWindow &window, int offsetX, int offsetY) {
     std::vector<Position> tiles = GetCellPosition();
     for (Position item : tiles) {
         sf::RectangleShape renderCell({(float)(cellSize - 1), (float)(cellSize - 1)});
-        renderCell.setPosition({(float)(item.col * cellSize + 11), (float)(item.row * cellSize + 11)});
+        renderCell.setPosition({(float)(item.col * cellSize + offsetX), (float)(item.row * cellSize + offsetY)});
         renderCell.setFillColor(colors[id]);
         window.draw(renderCell);
     }
